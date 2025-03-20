@@ -1,1 +1,1 @@
-# beer-brewery-db
+# beer-brewery-db application
