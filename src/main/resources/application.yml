@@ -18,7 +18,7 @@ spring:
                 hbm2ddl:
                     auto: update
     flyway:
-        enabled: true
+        enabled: false
         locations: classpath:db/migration/local
         baseline-on-migrate: true
         schemas: beer_brewery_schema
