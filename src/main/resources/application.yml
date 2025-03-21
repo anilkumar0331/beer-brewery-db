@@ -24,7 +24,7 @@ spring:
         locations: classpath:db/migration/local
         baseline-on-migrate: true
         schemas: beer_brewery_schema
-
+---
 # Configuration for the 'test' profile (H2 in-memory database)
 spring:
     profiles:
