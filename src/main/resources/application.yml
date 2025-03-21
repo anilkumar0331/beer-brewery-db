@@ -2,9 +2,11 @@ server:
     port: 8085
 spring:
     profiles:
-        active: local
+        active: local  # Default active profile set to 'local'
     application:
         name: beer-brewery-db
+    
+    # Configuration for the 'local' profile (PostgreSQL database)
     datasource:
         url: jdbc:postgresql://localhost:5433/beer_brewery
         username: postgres
@@ -22,3 +24,30 @@ spring:
         locations: classpath:db/migration/local
         baseline-on-migrate: true
         schemas: beer_brewery_schema
+
+# Configuration for the 'test' profile (H2 in-memory database)
+spring:
+    profiles:
+        active: test  # Activates the 'test' profile
+    application:
+        name: beer-brewery-db-test
+    
+    # Configuration for in-memory H2 database for testing
+    datasource:
+        url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+        username: sa
+        password: password
+        driver-class-name: org.h2.Driver
+    jpa:
+        show-sql: true
+        properties:
+            hibernate:
+                format_sql: true
+                hbm2ddl:
+                    auto: update  # Automatically update schema for tests
+    flyway:
+        enabled: false  # Disable Flyway for H2 in-memory database in test
+    h2:
+        console:
+            enabled: true  # Enable H2 console for debugging
+            path: /h2-console  # Access the H2 console at localhost:8085/h2-console
