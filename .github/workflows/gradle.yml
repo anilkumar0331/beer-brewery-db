@@ -82,15 +82,15 @@ jobs:
 
       - name: Build with Gradle
         env:
-          SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/beer_brewery
+          SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5433/beer_brewery
           SPRING_DATASOURCE_USERNAME: postgres
           SPRING_DATASOURCE_PASSWORD: Anil2025
           SPRING_FLYWAY_SCHEMAS: beer_brewery_schema
           SPRING_FLYWAY_BASELINE_ON_MIGRATE: true
-          SPRING_FLYWAY_ENABLED: true
+          SPRING_FLYWAY_ENABLED: false
           SPRING_JPA_PROPERTIES_HIBERNATE_DEFAULT_SCHEMA: beer_brewery_schema
         run: |
-          ./gradlew flywayMigrate -i
+#          ./gradlew flywayMigrate -i
           ./gradlew build
 
   dependency-submission:
