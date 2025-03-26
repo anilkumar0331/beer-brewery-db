@@ -90,7 +90,6 @@ jobs:
           SPRING_FLYWAY_ENABLED: false
           SPRING_JPA_PROPERTIES_HIBERNATE_DEFAULT_SCHEMA: beer_brewery_schema
         run: |
-#          ./gradlew flywayMigrate -i
           ./gradlew build
 
   dependency-submission:
