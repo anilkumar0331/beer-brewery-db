@@ -93,12 +93,6 @@ jobs:
         run: |
           ./gradlew build
 
-      - name: Verify environment
-        run: |
-          echo "Database URL: $SPRING_DATASOURCE_URL"
-          echo "Flyway schemas: $SPRING_FLYWAY_SCHEMAS"
-          ./gradlew properties | grep 'flyway'
-
   dependency-submission:
 
     runs-on: ubuntu-latest
