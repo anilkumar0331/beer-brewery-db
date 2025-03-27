@@ -54,7 +54,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres:latest
+        image: postgres:16
         env:
           POSTGRES_DB: testdb
           POSTGRES_USER: testuser
@@ -89,6 +89,7 @@ jobs:
           SPRING_FLYWAY_BASELINE_ON_MIGRATE: true
           SPRING_FLYWAY_ENABLED: true
           SPRING_JPA_PROPERTIES_HIBERNATE_DEFAULT_SCHEMA: beer_brewery_schema
+          SPRING_JPA_HIBERNATE_DDL_AUTO: none
         run: |
           ./gradlew build
 
