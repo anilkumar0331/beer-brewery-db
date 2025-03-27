@@ -63,7 +63,7 @@ spring:
         driver-class-name: org.postgresql.Driver
     jpa:
         hibernate:
-            ddl-auto: validate # Changed from 'update' to work better with Flyway
+            ddl-auto: update # Changed from 'update' to work better with Flyway
         show-sql: true
         properties:
             hibernate:
