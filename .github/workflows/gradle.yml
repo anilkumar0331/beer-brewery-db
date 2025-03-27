@@ -56,9 +56,9 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_DB: beer_brewery
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: Anil2025
+          POSTGRES_DB: testdb
+          POSTGRES_USER: testuser
+          POSTGRES_PASSWORD: testpass
         ports:
           - 5432:5432
         options: >-
@@ -82,15 +82,21 @@ jobs:
 
       - name: Build with Gradle
         env:
-          SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5433/beer_brewery
-          SPRING_DATASOURCE_USERNAME: postgres
-          SPRING_DATASOURCE_PASSWORD: Anil2025
+          SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/testdb
+          SPRING_DATASOURCE_USERNAME: testuser
+          SPRING_DATASOURCE_PASSWORD: testpass
           SPRING_FLYWAY_SCHEMAS: beer_brewery_schema
           SPRING_FLYWAY_BASELINE_ON_MIGRATE: true
-          SPRING_FLYWAY_ENABLED: false
+          SPRING_FLYWAY_ENABLED: true
           SPRING_JPA_PROPERTIES_HIBERNATE_DEFAULT_SCHEMA: beer_brewery_schema
         run: |
           ./gradlew build
+
+      - name: Verify environment
+        run: |
+          echo "Database URL: $SPRING_DATASOURCE_URL"
+          echo "Flyway schemas: $SPRING_FLYWAY_SCHEMAS"
+          ./gradlew properties | grep 'flyway'
 
   dependency-submission:
 
