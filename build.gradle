@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.4.3'
 	id 'io.spring.dependency-management' version '1.1.7'
+	id 'org.flywaydb.flyway' version '9.22.3'
 }
 
 group = 'com.anilkumar'
@@ -35,4 +36,14 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+// Add this Flyway configuration block
+flyway {
+	url = System.getenv('SPRING_DATASOURCE_URL') ?: 'jdbc:postgresql://localhost:5432/beer_brewery'
+	user = System.getenv('SPRING_DATASOURCE_USERNAME') ?: 'postgres'
+	password = System.getenv('SPRING_DATASOURCE_PASSWORD') ?: 'Anil2025'
+	schemas = ['beer_brewery_schema']
+	baselineOnMigrate = true
+	locations = ['classpath:db/migration/local']
 }
