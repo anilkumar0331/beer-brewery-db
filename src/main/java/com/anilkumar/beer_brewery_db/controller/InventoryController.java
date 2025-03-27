@@ -31,4 +31,9 @@ public class InventoryController {
     public ResponseEntity<InventoryModel> getInventoryById(@PathVariable Long id) {
         return ResponseEntity.ok(this.inventoryService.getInventoryById(id));
     }
+
+    @GetMapping("/welcome")
+    public String welcomeToInventory(){
+        return "Welcome to Inventory";
+    }
 }
